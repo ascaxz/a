@@ -118,23 +118,15 @@ Esp.Add = function(plr, root, col)
                 local trueheight = math.abs(up.Y - down.Y);
                 Holder.Box.Size = Vector2.new(trueheight / 2, trueheight);
                 Holder.Box.Position = Vector2.new(pos.X - (Holder.Box.Size.X / 2), pos.Y - (Holder.Box.Size.Y / 2));
-                Holder.Box.Visible = true;
                 Holder.OutlineBox.Size = Vector2.new(Holder.Box.Size.X - 2, Holder.Box.Size.Y - 2);
                 Holder.OutlineBox.Position = Vector2.new(Holder.Box.Position.X + 1, Holder.Box.Position.Y + 1);
-                Holder.OutlineBox.Visible = true;
                 Holder.OutlineHealth.Size = Vector2.new(4, Holder.OutlineBox.Size.Y + 2);
                 Holder.OutlineHealth.Position = Vector2.new(Holder.OutlineBox.Position.X - 4, Holder.OutlineBox.Position.Y - 1);
-                Holder.OutlineHealth.Visible = true;
                 Holder.Health.Size = Vector2.new(2, (-trueheight * Esp.GetHealth(plr)));
                 Holder.Health.Position = Vector2.new(Holder.OutlineBox.Position.X - 3, Holder.OutlineBox.Position.Y + Holder.Box.Size.Y - 3);
                 Holder.Health.Color = Esp.Settings.HpLow:Lerp(Esp.Settings.HpHigh, Esp.GetHealth(plr));
-                Holder.Health.Visible = true;
                 Holder.Name.Position = Vector2.new(Holder.OutlineBox.Position.X + (Holder.OutlineBox.Size.X / 2), Holder.OutlineBox.Position.Y - Holder.Name.TextBounds.Y - 1);
-                Holder.Name.Visible = true
                 Holder.Tracer.To = Vector2.new(pos.X, pos.Y + Holder.OutlineBox.Size.Y / 2);
-                Holder.Tracer.Visible = true
-                Holder.Name.Font = Esp.Settings.Font;
-                Holder.Name.Size = Esp.Settings.TextSize;
 			end
 			CheckVis(Holder, Vis)
 		elseif Holder.Name.Visible then
@@ -157,6 +149,8 @@ Esp.Remove = newcclosure(function(root)
 			v.Health:Remove()
 			v.Distance:Remove()
 			v.Tracer:Remove()
+            v.OutlineHealth:Remove()
+            v.OutlineBox:Remove()
 		end
 	end
 	Esp.Container[root] = nil
@@ -174,8 +168,14 @@ Esp.UpdateTextSize = newcclosure(function(num)
 	Esp.Settings.TextSize = num
 	for i, v in next, Esp.Container do
 		v.Name.Size = num
-		v.Distance.Size = num
 	end
+end)
+
+Esp.UpdateFontSize = newcclosure(function(num)
+    Esp.Settings.Font = num
+    for i, v in next, Esp.Container do
+        v.Name.Font = num
+    end
 end)
 
 Esp.UpdateTracerStart = newcclosure(function(pos)
