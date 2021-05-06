@@ -29,7 +29,7 @@ local v2new = Vector2.new
 local Player = game:GetService("Players").LocalPlayer
 local TracerStart = Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y - 35)
 
-local CheckVis = newcclosure(function(esp, inview)
+local CheckVis = function(esp, inview)
 	if not inview or (Esp.Settings.TeamCheck and Esp.TeamCheck(esp.Player)) or (esp.Root.Position - Camera.CFrame.Position).Magnitude > Esp.Settings.Range then
 		esp.Name.Visible = false
 		esp.Box.Visible = false
@@ -47,7 +47,7 @@ local CheckVis = newcclosure(function(esp, inview)
 	esp.Tracer.Visible = Esp.Settings.Tracer
     esp.OutlineBox.Visible = Esp.Settings.BoxOutline
     esp.OutlineHealth.Visible = Esp.Settings.HPOutline
-end)
+end
 
 -- newcclosure breaks Drawing.new apparently
 Esp.Add = function(plr, root, col)
@@ -140,7 +140,7 @@ Esp.Add = function(plr, root, col)
 	end)
 end
 
-Esp.Remove = newcclosure(function(root)
+Esp.Remove = function(root)
 	for i, v in next, Esp.Container do
 		if i == root then
 			v.Connection:Disconnect()
@@ -154,38 +154,38 @@ Esp.Remove = newcclosure(function(root)
 		end
 	end
 	Esp.Container[root] = nil
-end)
+end
 
-Esp.TeamCheck = newcclosure(function(plr)
+Esp.TeamCheck = function(plr)
 	return plr.Team == Player.Team
-end) -- can be overwritten for games that don't use default teams
+end-- can b overwritten for games that don't use default teams
 
-Esp.GetHealth = newcclosure(function(plr)
+Esp.GetHealth = function(plr)
 	return plr.Character.Humanoid.Health / plr.Character.Humanoid.MaxHealth
-end) -- can be overwritten for games that don't use default characters
+end -- can be overwritten for games that don't use default characters
 
-Esp.UpdateTextSize = newcclosure(function(num)
+Esp.UpdateTextSize = function(num)
 	Esp.Settings.TextSize = num
 	for i, v in next, Esp.Container do
 		v.Name.Size = num
 	end
-end)
+end
 
-Esp.UpdateFontSize = newcclosure(function(num)
+Esp.UpdateFontSize = function(num)
     Esp.Settings.Font = num
     for i, v in next, Esp.Container do
         v.Name.Font = num
     end
-end)
+end
 
-Esp.UpdateTracerStart = newcclosure(function(pos)
+Esp.UpdateTracerStart = function(pos)
     TracerStart = pos
     for i, v in next, Esp.Container do
         v.Tracer.From = pos
     end
-end)
+end
 
-Esp.ToggleRainbow = newcclosure(function(bool)
+Esp.ToggleRainbow = function(bool)
 	if Esp.RainbowConn then
 		Esp.RainbowConn:Disconnect()
 	end
@@ -207,6 +207,6 @@ Esp.ToggleRainbow = newcclosure(function(bool)
 			v.Tracer.Color = v.Colour
 		end
 	end
-end)
+end
 
 return Esp
