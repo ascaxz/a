@@ -20,7 +20,8 @@ local Esp = {
         HpHigh = Color3.new(0, 1, 0),
         Font = 0,
         BoxOutline = false,
-        HPOutline = false
+        HPOutline = false,
+        BoxColor = Color3.new(1, 1, 1)
 	}
 }
 local Camera = workspace.CurrentCamera
@@ -83,6 +84,7 @@ Esp.Add = function(plr, root, col)
     Holder.Box.Thickness = 1
 	Holder.OutlineBox.Color = col
 	Holder.OutlineBox.Filled = false
+    Holder.OutlineBox.Thickness = 1
     Holder.OutlineHealth.Filled = false
     Holder.OutlineHealth.Thickness = 1
 	Holder.Health.Thickness = 1
