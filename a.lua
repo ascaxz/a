@@ -82,7 +82,7 @@ Esp.Add = function(plr, root, col)
     Holder.Name.Font = Esp.Settings.Font;
     Holder.Box.Filled = false
     Holder.Box.Thickness = 1
-	Holder.OutlineBox.Color = Esp.Settings.BoxColor
+    Holder.Box.Color = Esp.Settings.BoxColor
 	Holder.OutlineBox.Filled = false
     Holder.OutlineBox.Thickness = 1
     Holder.OutlineHealth.Filled = false
@@ -187,7 +187,7 @@ end
 Esp.UpdateBoxColor = function(color)
     Esp.Settings.BoxColor = color;
     for i, v in next, Esp.Container do
-        v.OutlineBox.Color = color;
+        v.Box.Color = color;
     end
 end
 
