@@ -34,7 +34,6 @@ local CheckVis = function(esp, inview)
 		esp.Name.Visible = false
 		esp.Box.Visible = false
 		esp.Health.Visible = false
-		esp.Distance.Visible = false
 		esp.Tracer.Visible = false
         esp.OutlineBox.Visible = false
         esp.OutlineHealth.Visible = false
@@ -43,7 +42,6 @@ local CheckVis = function(esp, inview)
 	esp.Name.Visible = Esp.Settings.Name
 	esp.Box.Visible = Esp.Settings.Box
 	esp.Health.Visible = Esp.Settings.Health
-	esp.Distance.Visible = Esp.Settings.Distance
 	esp.Tracer.Visible = Esp.Settings.Tracer
     esp.OutlineBox.Visible = Esp.Settings.BoxOutline
     esp.OutlineHealth.Visible = Esp.Settings.HPOutline
@@ -147,7 +145,6 @@ Esp.Remove = function(root)
 			v.Name:Remove()
 			v.Box:Remove()
 			v.Health:Remove()
-			v.Distance:Remove()
 			v.Tracer:Remove()
             v.OutlineHealth:Remove()
             v.OutlineBox:Remove()
@@ -195,7 +192,6 @@ Esp.ToggleRainbow = function(bool)
 			for i, v in next, Esp.Container do
 				v.Name.Color = Colour
 				v.Box.Color = Colour
-				v.Distance.Color = Colour
 				v.Tracer.Color = Colour
 			end
 		end)
@@ -203,7 +199,6 @@ Esp.ToggleRainbow = function(bool)
 		for i, v in next, Esp.Container do
 			v.Name.Color = v.Colour
 			v.Box.Color = v.Colour
-			v.Distance.Color = v.Colour
 			v.Tracer.Color = v.Colour
 		end
 	end
